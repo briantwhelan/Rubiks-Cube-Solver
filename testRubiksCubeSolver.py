@@ -1,4 +1,5 @@
 import unittest
+import rubiksCubeSolver
 
 class TestRubiksCubeSolver(unittest.TestCase):
     @classmethod
@@ -16,7 +17,7 @@ class TestRubiksCubeSolver(unittest.TestCase):
         print("Tearing down test environment...")
         
     def testSolveRubiksCube(self):
-        self.assertEqual(True, False)
+        self.assertEqual(rubiksCubeSolver.solveRubiksCube(), False)
    
 if __name__=='__main__':
     testSuite = unittest.TestSuite()

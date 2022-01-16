@@ -1,0 +1,3 @@
+def solveRubiksCube():
+    return True
+
