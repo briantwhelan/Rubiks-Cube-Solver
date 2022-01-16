@@ -22,5 +22,6 @@ class TestRubiksCubeSolver(unittest.TestCase):
 if __name__=='__main__':
     testSuite = unittest.TestSuite()
     testSuite.addTests([TestRubiksCubeSolver("testSolveRubiksCube")])
-    runner = unittest.TextTestRunner()
+    fileHandle = open("testReport.txt", "w")
+    runner = unittest.TextTestRunner(fileHandle)
     runner.run(testSuite)
