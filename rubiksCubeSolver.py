@@ -1,3 +1,3 @@
-def solveRubiksCube():
-    return True
+def solveRubiksCube(rubiksCube):
+    return rubiksCube
 

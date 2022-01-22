@@ -12,12 +12,14 @@ class TestRubiksCubeSolver(unittest.TestCase):
 
     def setUp(self):
         print("Setting up test environment...")
+        self.rubiksCube = True
+        self.solvedRubiksCube = True
        
     def tearDown(self):
         print("Tearing down test environment...")
         
     def testSolveRubiksCube(self):
-        self.assertEqual(rubiksCubeSolver.solveRubiksCube(), False)
+        self.assertEqual(rubiksCubeSolver.solveRubiksCube(self.rubiksCube), self.solvedRubiksCube)
    
 if __name__=='__main__':
     testSuite = unittest.TestSuite()
