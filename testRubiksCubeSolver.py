@@ -18,12 +18,15 @@ class TestRubiksCubeSolver(unittest.TestCase):
     def tearDown(self):
         print("Tearing down test environment...")
         
+    def testStateOfRubiksCube(self):
+        self.assertEqual(len(self.rubiksCube.faces), 6)
+
     def testSolveRubiksCube(self):
         self.assertEqual(self.rubiksCube.solve(), self.solvedRubiksCube.solved)
-   
+    
 if __name__=='__main__':
     testSuite = unittest.TestSuite()
-    testSuite.addTests([TestRubiksCubeSolver("testSolveRubiksCube")])
+    testSuite.addTests([TestRubiksCubeSolver("testStateOfRubiksCube"), TestRubiksCubeSolver("testSolveRubiksCube")])
     fileHandle = open("testReport.txt", "w")
     runner = unittest.TextTestRunner(fileHandle)
     runner.run(testSuite)
