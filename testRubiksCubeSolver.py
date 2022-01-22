@@ -20,6 +20,8 @@ class TestRubiksCubeSolver(unittest.TestCase):
         
     def testStateOfRubiksCube(self):
         self.assertEqual(len(self.rubiksCube.faces), 6)
+        for face in self.rubiksCube.faces:    
+            self.assertEqual(len(face.pieces), 9)
 
     def testSolveRubiksCube(self):
         self.assertEqual(self.rubiksCube.solve(), self.solvedRubiksCube.solved)
