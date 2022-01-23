@@ -31,12 +31,24 @@ class Face():
             self.pieces = [Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange]
         elif(face == TempFace.down):
             self.pieces = [Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green]
+    
+    def __eq__(self, other):
+        if(isinstance(other, Face)):
+            return self.name == other.name and self.pieces == other.pieces
+        else:
+            return False
 
 class RubiksCube():
     def __init__(self):
         self.faces = [Face(TempFace.front), Face(TempFace.up), Face(TempFace.right), Face(TempFace.back), Face(TempFace.left), Face(TempFace.down)]
         self.solved = True
     
+    def __eq__(self, other):
+        if(isinstance(other, RubiksCube)):
+            return self.faces == other.faces
+        else:
+            return False
+
     def is6Faces(self):
         return (len(self.faces) == 6)
 

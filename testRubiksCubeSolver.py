@@ -18,18 +18,36 @@ class TestRubiksCubeSolver(unittest.TestCase):
     def tearDown(self):
         print("Tearing down test environment...")
         
-    def testStateOfRubiksCube(self):
-        self.assertEqual(len(self.rubiksCube.faces), 6)
+    def testNumberOfRubiksCubeFaces(self):
+        numberOfRubiksCubeFaces = len(self.rubiksCube.faces)
+        self.assertEqual(numberOfRubiksCubeFaces, 6)
+        
+    def testNumberOfPiecesOnEachFace(self):
         for face in self.rubiksCube.faces:    
             self.assertEqual(len(face.pieces), 9)
+        
+    def testColoursOnFaces(self):
         self.assertEqual(self.rubiksCube.isValid(), True) 
+        
+    def testFaceEquality(self):
+        face1 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
+        face2 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
+        self.assertEqual(face1, face2)
+        face3 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.back)
+        self.assertNotEqual(face1, face3)
+
+    def testRubiksCubeEquality(self):
+        self.assertEqual(self.rubiksCube, rubiksCubeSolver.RubiksCube())
 
     def testSolveRubiksCube(self):
         self.assertEqual(self.rubiksCube.solve(), self.solvedRubiksCube.solved)
     
 if __name__=='__main__':
     testSuite = unittest.TestSuite()
-    testSuite.addTests([TestRubiksCubeSolver("testStateOfRubiksCube"), TestRubiksCubeSolver("testSolveRubiksCube")])
+    testSuite.addTests([TestRubiksCubeSolver("testNumberOfRubiksCubeFaces"), TestRubiksCubeSolver("testNumberOfPiecesOnEachFace"), 
+                        TestRubiksCubeSolver("testColoursOnFaces"), TestRubiksCubeSolver("testFaceEquality"), 
+                        TestRubiksCubeSolver("testRubiksCubeEquality")])
+    testSuite.addTests([TestRubiksCubeSolver("testSolveRubiksCube")])
     fileHandle = open("testReport.txt", "w")
     runner = unittest.TextTestRunner(fileHandle)
     runner.run(testSuite)
