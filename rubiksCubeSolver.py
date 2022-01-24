@@ -22,7 +22,7 @@ class Face():
         if(face == TempFace.front):
             self.pieces = [Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white]
         elif(face == TempFace.up):
-            self.pieces = [Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue]
+            self.pieces = [Colour.green, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue]
         elif(face == TempFace.right):
             self.pieces = [Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red]
         elif(face == TempFace.back):
@@ -30,13 +30,21 @@ class Face():
         elif(face == TempFace.left):
             self.pieces = [Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange]
         elif(face == TempFace.down):
-            self.pieces = [Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green]
+            self.pieces = [Colour.blue, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green]
     
     def __eq__(self, other):
         if(isinstance(other, Face)):
             return self.name == other.name and self.pieces == other.pieces
         else:
             return False
+
+    def isOneColour(self):
+        isOneColour = True
+        for piece1 in self.pieces:
+            for piece2 in self.pieces:
+                if(piece1 != piece2):
+                    isOneColour = False
+        return isOneColour
 
 class RubiksCube():
     def __init__(self):

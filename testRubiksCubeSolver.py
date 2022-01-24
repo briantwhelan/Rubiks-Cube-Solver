@@ -17,7 +17,13 @@ class TestRubiksCubeSolver(unittest.TestCase):
        
     def tearDown(self):
         print("Tearing down test environment...")
-        
+
+    def testIsOneColourOnFace(self):
+        face1 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
+        self.assertTrue(face1.isOneColour())
+        face2 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.up)
+        self.assertFalse(face2.isOneColour())
+
     def testNumberOfRubiksCubeFaces(self):
         numberOfRubiksCubeFaces = len(self.rubiksCube.faces)
         self.assertEqual(numberOfRubiksCubeFaces, 6)
