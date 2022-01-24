@@ -85,5 +85,12 @@ class RubiksCube():
     def isValid(self):
         return (self.is6Faces() and self.is9PiecesInEachFace() and self.is9PiecesOfEachColour())
     
+    def isSolved(self):
+        isSolved = True
+        for face in self.faces:
+            if(not face.isOneColour()):
+                isSolved = False
+        return isSolved
+
     def solve(self):
         return self.solved
