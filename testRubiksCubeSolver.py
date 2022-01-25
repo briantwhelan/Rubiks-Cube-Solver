@@ -18,6 +18,12 @@ class TestRubiksCubeSolver(unittest.TestCase):
     def tearDown(self):
         print("Tearing down test environment...")
 
+    def testReadingUserInput(self):
+        self.assertEqual(rubiksCubeSolver.splitFaceIntoPieces("RRRRRRRRR"), ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'])
+        self.assertEqual(rubiksCubeSolver.splitFaceIntoPieces("WYROBGWYR"), ['W', 'Y', 'R', 'O', 'B', 'G', 'W', 'Y', 'R'])
+        self.assertEqual(rubiksCubeSolver.splitRubiksCubeIntoFaces("WWWWWWWWW YYYYYYYYY RRRRRRRRR OOOOOOOOO BBBBBBBBB GGGGGGGGG"), ["WWWWWWWWW", "YYYYYYYYY", "RRRRRRRRR", "OOOOOOOOO", "BBBBBBBBB", "GGGGGGGGG"])
+        self.assertEqual(rubiksCubeSolver.splitRubiksCubeIntoFaces("WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG"), ["WWWYYYWWW", "YYYWWWYYY", "RRROOORRR", "OOORRROOO", "BBBGGGBBB", "GGGBBBGGG"])
+
     def testIsOneColourOnFace(self):
         face1 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
         self.assertTrue(face1.isOneColour())
@@ -53,7 +59,8 @@ class TestRubiksCubeSolver(unittest.TestCase):
     
 if __name__=='__main__':
     testSuite = unittest.TestSuite()
-    testSuite.addTests([TestRubiksCubeSolver("testNumberOfRubiksCubeFaces"), TestRubiksCubeSolver("testNumberOfPiecesOnEachFace"), 
+    testSuite.addTests([TestRubiksCubeSolver("testReadingUserInput"),
+                        TestRubiksCubeSolver("testNumberOfRubiksCubeFaces"), TestRubiksCubeSolver("testNumberOfPiecesOnEachFace"), 
                         TestRubiksCubeSolver("testColoursOnFaces"), TestRubiksCubeSolver("testIsOneColourOnFace"), 
                         TestRubiksCubeSolver("testFaceEquality"), TestRubiksCubeSolver("testRubiksCubeEquality")])
     testSuite.addTests([TestRubiksCubeSolver("testSolveRubiksCube")])

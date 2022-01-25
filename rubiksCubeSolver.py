@@ -1,5 +1,12 @@
 import enum
 
+
+def splitFaceIntoPieces(face):
+    return list(face)
+
+def splitRubiksCubeIntoFaces(rubiksCube):
+    return rubiksCube.split()
+
 class Colour(enum.Enum):
     white = 0
     yellow = 1
