@@ -15,30 +15,11 @@ class Colour(enum.Enum):
     blue = 4
     green = 5
 
-class TempFace(enum.Enum):
-    front = 0
-    up = 1
-    right = 2
-    back = 3
-    left = 4
-    down = 5
-
 class Face():
-    def __init__(self, face):
-        self.name = face.name
-        if(face == TempFace.front):
-            self.pieces = [Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white, Colour.white]
-        elif(face == TempFace.up):
-            self.pieces = [Colour.green, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue, Colour.blue]
-        elif(face == TempFace.right):
-            self.pieces = [Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red, Colour.red]
-        elif(face == TempFace.back):
-            self.pieces = [Colour.yellow, Colour.yellow, Colour.yellow, Colour.yellow, Colour.yellow, Colour.yellow, Colour.yellow, Colour.yellow, Colour.yellow]
-        elif(face == TempFace.left):
-            self.pieces = [Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange, Colour.orange]
-        elif(face == TempFace.down):
-            self.pieces = [Colour.blue, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green, Colour.green]
-    
+    def __init__(self, name, face):
+        self.name = name
+        self.pieces = splitFaceIntoPieces(face)
+
     def __eq__(self, other):
         if(isinstance(other, Face)):
             return self.name == other.name and self.pieces == other.pieces
@@ -54,9 +35,10 @@ class Face():
         return isOneColour
 
 class RubiksCube():
-    def __init__(self):
-        self.faces = [Face(TempFace.front), Face(TempFace.up), Face(TempFace.right), Face(TempFace.back), Face(TempFace.left), Face(TempFace.down)]
-        self.solved = True
+    def __init__(self, *args):
+        if(len(args) == 0):
+            self.faces = [Face('F', "WWWWWWWWW"), Face('U', "BBBBBBBBB"), Face('R', "RRRRRRRRR"), Face('B', "YYYYYYYYY"), Face('L', "OOOOOOOOO"), Face('D', "GGGGGGGGG")]
+            self.solved = True
     
     def __eq__(self, other):
         if(isinstance(other, RubiksCube)):

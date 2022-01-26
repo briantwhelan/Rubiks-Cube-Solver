@@ -25,9 +25,9 @@ class TestRubiksCubeSolver(unittest.TestCase):
         self.assertEqual(rubiksCubeSolver.splitRubiksCubeIntoFaces("WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG"), ["WWWYYYWWW", "YYYWWWYYY", "RRROOORRR", "OOORRROOO", "BBBGGGBBB", "GGGBBBGGG"])
 
     def testIsOneColourOnFace(self):
-        face1 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
+        face1 = rubiksCubeSolver.Face('F', "WWWWWWWWW")
         self.assertTrue(face1.isOneColour())
-        face2 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.up)
+        face2 = rubiksCubeSolver.Face('F', "WWWYYYWWW")
         self.assertFalse(face2.isOneColour())
 
     def testNumberOfRubiksCubeFaces(self):
@@ -42,10 +42,10 @@ class TestRubiksCubeSolver(unittest.TestCase):
         self.assertEqual(self.rubiksCube.isValid(), True) 
         
     def testFaceEquality(self):
-        face1 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
-        face2 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.front)
+        face1 = rubiksCubeSolver.Face('F', "WWWWWWWWW")
+        face2 = rubiksCubeSolver.Face('F', "WWWWWWWWW")
         self.assertEqual(face1, face2)
-        face3 = rubiksCubeSolver.Face(rubiksCubeSolver.TempFace.back)
+        face3 = rubiksCubeSolver.Face('F', "YYYYYYYYY")
         self.assertNotEqual(face1, face3)
 
     def testRubiksCubeEquality(self):
