@@ -1,6 +1,5 @@
 import enum
 
-
 def splitFaceIntoPieces(face):
     return list(face)
 
@@ -38,7 +37,9 @@ class RubiksCube():
     def __init__(self, *args):
         if(len(args) == 0):
             self.faces = [Face('F', "WWWWWWWWW"), Face('U', "BBBBBBBBB"), Face('R', "RRRRRRRRR"), Face('B', "YYYYYYYYY"), Face('L', "OOOOOOOOO"), Face('D', "GGGGGGGGG")]
-            self.solved = True
+        elif(len(args) == 1):
+            faces = splitRubiksCubeIntoFaces(args[0])
+            self.faces = [Face('F', faces[0]), Face('U', faces[1]), Face('R', faces[2]), Face('B', faces[3]), Face('L', faces[4]), Face('D', faces[5])]
     
     def __eq__(self, other):
         if(isinstance(other, RubiksCube)):
@@ -82,4 +83,4 @@ class RubiksCube():
         return isSolved
 
     def solve(self):
-        return self.solved
+        return True
