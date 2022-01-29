@@ -12,11 +12,21 @@ class TestRubiksCubeSolver(unittest.TestCase):
 
     def setUp(self):
         print("Setting up test environment...")
-        self.rubiksCube = rubiksCubeSolver.RubiksCube()
-        self.solvedRubiksCube = rubiksCubeSolver.RubiksCube("WWWWWWWWW YYYYYYYYY RRRRRRRRR OOOOOOOOO BBBBBBBBB GGGGGGGGG")
+        self.rubiksCube = rubiksCubeSolver.RubiksCube("WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG")
+        self.solvedRubiksCube = rubiksCubeSolver.RubiksCube("SOLVED")
        
     def tearDown(self):
         print("Tearing down test environment...")
+
+    def testValidatingUserInput(self):
+        self.assertTrue(rubiksCubeSolver.isValidInput(["RANDOM"]))
+        self.assertTrue(rubiksCubeSolver.isValidInput(["rAnDoM"]))
+        self.assertTrue(rubiksCubeSolver.isValidInput(["SOLVED"]))
+        self.assertTrue(rubiksCubeSolver.isValidInput(["sOlVeD"]))
+        self.assertTrue(rubiksCubeSolver.isValidInput(["WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG"]))
+        self.assertTrue(rubiksCubeSolver.isValidInput(["WWWWWWWWW YYYYYYYYY RRRRRRRRR OOOOOOOOO BBBBBBBBB GGGGGGGGG"]))
+        self.assertFalse(rubiksCubeSolver.isValidInput(["test"]))
+        self.assertFalse(rubiksCubeSolver.isValidInput(["test", "test"]))
 
     def testReadingUserInput(self):
         self.assertEqual(rubiksCubeSolver.splitFaceIntoPieces("RRRRRRRRR"), ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'])
@@ -49,7 +59,7 @@ class TestRubiksCubeSolver(unittest.TestCase):
         self.assertNotEqual(face1, face3)
 
     def testRubiksCubeEquality(self):
-        self.assertEqual(self.rubiksCube, rubiksCubeSolver.RubiksCube())
+        self.assertEqual(self.rubiksCube, rubiksCubeSolver.RubiksCube("WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG"))
     
     def testIsRubiksCubeSolved(self):
         self.assertFalse(self.rubiksCube.isSolved())
@@ -60,7 +70,7 @@ class TestRubiksCubeSolver(unittest.TestCase):
     
 if __name__=='__main__':
     testSuite = unittest.TestSuite()
-    testSuite.addTests([TestRubiksCubeSolver("testReadingUserInput"),
+    testSuite.addTests([TestRubiksCubeSolver("testValidatingUserInput"), TestRubiksCubeSolver("testReadingUserInput"),
                         TestRubiksCubeSolver("testNumberOfRubiksCubeFaces"), TestRubiksCubeSolver("testNumberOfPiecesOnEachFace"), 
                         TestRubiksCubeSolver("testColoursOnFaces"), TestRubiksCubeSolver("testIsOneColourOnFace"), 
                         TestRubiksCubeSolver("testFaceEquality"), TestRubiksCubeSolver("testRubiksCubeEquality")])

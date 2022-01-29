@@ -6,6 +6,16 @@ def splitFaceIntoPieces(face):
 def splitRubiksCubeIntoFaces(rubiksCube):
     return rubiksCube.split()
 
+def isValidInput(userInput):
+    isValidInput = False
+    if(len(userInput) == 1):
+        if(userInput[0].upper() == "SOLVED" 
+                or userInput[0].upper() == "RANDOM"
+                or userInput[0].upper() == "WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG"
+                or userInput[0].upper() == "WWWWWWWWW YYYYYYYYY RRRRRRRRR OOOOOOOOO BBBBBBBBB GGGGGGGGG"):
+            isValidInput = True
+    return isValidInput
+
 class Colour(enum.Enum):
     white = 0
     yellow = 1
@@ -35,12 +45,17 @@ class Face():
 
 class RubiksCube():
     def __init__(self, *args):
-        if(len(args) == 0):
-            self.faces = [Face('F', "WWWWWWWWW"), Face('U', "BBBBBBBBB"), Face('R', "RRRRRRRRR"), Face('B', "YYYYYYYYY"), Face('L', "OOOOOOOOO"), Face('D', "GGGGGGGGG")]
-        elif(len(args) == 1):
-            faces = splitRubiksCubeIntoFaces(args[0])
-            self.faces = [Face('F', faces[0]), Face('U', faces[1]), Face('R', faces[2]), Face('B', faces[3]), Face('L', faces[4]), Face('D', faces[5])]
-    
+        if(isValidInput(args)):
+            if(args[0].upper() == "SOLVED"):
+                self.faces =[Face('F', "WWWWWWWWW"), Face('U', "BBBBBBBBB"), Face('R', "RRRRRRRRR"), Face('B', "YYYYYYYYY"), Face('L', "OOOOOOOOO"), Face('D', "GGGGGGGGG")]
+            elif(args[0].upper() == "RANDOM"):
+                self.faces =[Face('F', "WYWYWYWYW"), Face('U', "BGBBGBBGB"), Face('R', "RORRORROR"), Face('B', "YWYWYWYWY"), Face('L', "ORORORORO"), Face('D', "GBGGBGGBG")]
+            else:
+                faces = splitRubiksCubeIntoFaces(args[0])
+                self.faces = [Face('F', faces[0]), Face('U', faces[1]), Face('R', faces[2]), Face('B', faces[3]), Face('L', faces[4]), Face('D', faces[5])]
+        else:
+            raise ValueError("Invalid argument")
+
     def __eq__(self, other):
         if(isinstance(other, RubiksCube)):
             return self.faces == other.faces
