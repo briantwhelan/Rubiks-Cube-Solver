@@ -46,10 +46,7 @@ class TestRubiksCubeSolver(unittest.TestCase):
         
     def testNumberOfPiecesOnEachFace(self):
         for face in self.rubiksCube.faces:    
-            self.assertEqual(len(face.pieces), 9)
-        
-    def testColoursOnFaces(self):
-        self.assertEqual(self.rubiksCube.isValid(), True) 
+            self.assertEqual(len(face.pieces), 9) 
         
     def testFaceEquality(self):
         face1 = rubiksCubeSolver.Face('F', "WWWWWWWWW")
@@ -72,8 +69,7 @@ if __name__=='__main__':
     testSuite = unittest.TestSuite()
     testSuite.addTests([TestRubiksCubeSolver("testValidatingUserInput"), TestRubiksCubeSolver("testReadingUserInput"),
                         TestRubiksCubeSolver("testNumberOfRubiksCubeFaces"), TestRubiksCubeSolver("testNumberOfPiecesOnEachFace"), 
-                        TestRubiksCubeSolver("testColoursOnFaces"), TestRubiksCubeSolver("testIsOneColourOnFace"), 
-                        TestRubiksCubeSolver("testFaceEquality"), TestRubiksCubeSolver("testRubiksCubeEquality")])
+                        TestRubiksCubeSolver("testIsOneColourOnFace"), TestRubiksCubeSolver("testFaceEquality"), TestRubiksCubeSolver("testRubiksCubeEquality")])
     testSuite.addTests([TestRubiksCubeSolver("testSolveRubiksCube")])
     fileHandle = open("testReport.txt", "w")
     runner = unittest.TextTestRunner(fileHandle)

@@ -6,13 +6,50 @@ def splitFaceIntoPieces(face):
 def splitRubiksCubeIntoFaces(rubiksCube):
     return rubiksCube.split()
 
+def is6Faces(faces):
+    return (len(faces) == 6)
+
+def is9PiecesInEachFace(faces):
+    is9PiecesInEachFace = True
+    for face in faces:
+        if(len(face) != 9):
+            is9PiecesInEachFace = False
+    return is9PiecesInEachFace
+
+def is9PiecesOfEachColour(faces):
+    is9PiecesOfEachColour = True
+    colourCount = {}
+    for face in faces:
+        for piece in face:
+            if(piece in colourCount):
+                colourCount[piece] += 1
+            else:
+                colourCount[piece] = 1
+    
+    for colour in colourCount: 
+        if(colourCount[colour] != 9):
+            is9PiecesOfEachColour = False
+    return is9PiecesOfEachColour
+
+def isValid(self):
+    return (self.is6Faces() and self.is9PiecesInEachFace() and self.is9PiecesOfEachColour())
+
+def isValidRubiksCube(rubiksCube):
+    isValidRubiksCube = False
+    faces = rubiksCube.split()
+    if(is6Faces(faces) 
+            and is9PiecesInEachFace(faces) 
+            and is9PiecesOfEachColour(faces)):
+        isValidRubiksCube = True
+
+    return isValidRubiksCube
+
 def isValidInput(userInput):
     isValidInput = False
     if(len(userInput) == 1):
         if(userInput[0].upper() == "SOLVED" 
                 or userInput[0].upper() == "RANDOM"
-                or userInput[0].upper() == "WWWYYYWWW YYYWWWYYY RRROOORRR OOORRROOO BBBGGGBBB GGGBBBGGG"
-                or userInput[0].upper() == "WWWWWWWWW YYYYYYYYY RRRRRRRRR OOOOOOOOO BBBBBBBBB GGGGGGGGG"):
+                or isValidRubiksCube(userInput[0].upper())):
             isValidInput = True
     return isValidInput
 
@@ -62,34 +99,6 @@ class RubiksCube():
         else:
             return False
 
-    def is6Faces(self):
-        return (len(self.faces) == 6)
-
-    def is9PiecesInEachFace(self):
-        is9PiecesInEachFace = True
-        for face in self.faces:
-            if(len(face.pieces) != 9):
-                is9PiecesInEachFace = False
-        return is9PiecesInEachFace
-
-    def is9PiecesOfEachColour(self):
-        is9PiecesOfEachColour = True
-        colourCount = {}
-        for face in self.faces:
-            for piece in face.pieces:
-                if(piece in colourCount):
-                    colourCount[piece] += 1
-                else:
-                    colourCount[piece] = 1
-        
-        for colour in colourCount: 
-            if(colourCount[colour] != 9):
-                is9PiecesOfEachColour = False
-        return is9PiecesOfEachColour
-
-    def isValid(self):
-        return (self.is6Faces() and self.is9PiecesInEachFace() and self.is9PiecesOfEachColour())
-    
     def isSolved(self):
         isSolved = True
         for face in self.faces:
