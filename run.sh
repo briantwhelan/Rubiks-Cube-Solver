@@ -1,0 +1,2 @@
+python rubiksCubeSolver.py
+
