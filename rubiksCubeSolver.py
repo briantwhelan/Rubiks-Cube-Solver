@@ -80,13 +80,16 @@ class Face():
                     isOneColour = False
         return isOneColour
 
+    def __repr__(self):
+        return repr(self.name) + ": " + repr(self.pieces) + "\n"
+
 class RubiksCube():
     def __init__(self, *args):
         if(isValidInput(args)):
             if(args[0].upper() == "SOLVED"):
-                self.faces =[Face('F', "WWWWWWWWW"), Face('U', "BBBBBBBBB"), Face('R', "RRRRRRRRR"), Face('B', "YYYYYYYYY"), Face('L', "OOOOOOOOO"), Face('D', "GGGGGGGGG")]
+                self.faces = [Face('F', "WWWWWWWWW"), Face('U', "BBBBBBBBB"), Face('R', "RRRRRRRRR"), Face('B', "YYYYYYYYY"), Face('L', "OOOOOOOOO"), Face('D', "GGGGGGGGG")]
             elif(args[0].upper() == "RANDOM"):
-                self.faces =[Face('F', "WYWYWYWYW"), Face('U', "BGBBGBBGB"), Face('R', "RORRORROR"), Face('B', "YWYWYWYWY"), Face('L', "ORORORORO"), Face('D', "GBGGBGGBG")]
+                self.faces = [Face('F', "WYWYWYWYW"), Face('U', "BGBBGBBGB"), Face('R', "RORRORROR"), Face('B', "YWYWYWYWY"), Face('L', "ORORORORO"), Face('D', "GBGGBGGBG")]
             else:
                 faces = splitRubiksCubeIntoFaces(args[0])
                 self.faces = [Face('F', faces[0]), Face('U', faces[1]), Face('R', faces[2]), Face('B', faces[3]), Face('L', faces[4]), Face('D', faces[5])]
@@ -108,3 +111,18 @@ class RubiksCube():
 
     def solve(self):
         return True
+
+    def __repr__(self):
+        string = ""
+        for face in self.faces:
+            string = string + repr(face)
+        return string
+        
+
+def main():
+    userInput = input("Enter the state of the Rubik's cube: ")
+    rubiksCube = RubiksCube(userInput)
+    print(rubiksCube)
+
+if __name__ == "__main__":
+    main()
